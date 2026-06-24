@@ -80,18 +80,21 @@ export default function Home() {
   return (
     <main>
       <header className="flex min-h-10 items-center justify-center bg-alert px-5 py-2 text-center sm:min-h-[72px]">
-        <h2 className="font-montserrat text-base leading-snug text-white sm:text-2xl">
-          ⚠️ Sua compra não está concluída
-        </h2>
+        <div className="flex w-full max-w-[830px] flex-col items-center justify-center gap-3 sm:flex-row sm:gap-8">
+          <h2 className="font-montserrat text-base leading-snug text-white sm:text-2xl">
+            ⚠️ Sua compra não está concluída
+          </h2>
+          <div className="w-full max-w-[316px] sm:max-w-[391px]">
+            <ProgressBar />
+          </div>
+        </div>
       </header>
 
       <section
         className="min-h-[543px] bg-cover bg-[59%_44%] px-3 pb-12 pt-6 sm:min-h-[711px] sm:px-6 sm:pt-5"
         style={{ backgroundImage: `url(${heroBackground})` }}
       >
-        <ProgressBar />
-
-        <h1 className="mx-auto mt-6 max-w-[560px] text-center font-montserrat text-lg font-bold leading-[1.4] text-gold sm:mt-[68px] sm:text-[28px] sm:leading-[1.1]">
+        <h1 className="mx-auto max-w-[560px] text-center font-montserrat text-lg font-bold leading-[1.4] text-gold sm:mt-[68px] sm:text-[28px] sm:leading-[1.1]">
           Assista com atenção ao vídeo abaixo para finalizar sua compra.
         </h1>
 
