@@ -80,8 +80,8 @@ export default function Home() {
   return (
     <main>
       <header className="flex min-h-10 items-center justify-center bg-alert px-5 py-2 text-center sm:min-h-[72px]">
-        <div className="flex w-full max-w-[830px] flex-col items-center justify-center gap-3 sm:flex-row sm:gap-8">
-          <h2 className="font-montserrat text-base leading-snug text-white sm:text-2xl">
+        <div className="flex w-full max-w-[980px] flex-col items-center justify-center gap-3 sm:flex-row sm:justify-start sm:gap-10">
+          <h2 className="font-montserrat text-base leading-snug text-white sm:min-w-[430px] sm:whitespace-nowrap sm:text-2xl">
             ⚠️ Sua compra não está concluída
           </h2>
           <div className="w-full max-w-[316px] sm:max-w-[391px]">
