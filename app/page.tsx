@@ -1,4 +1,5 @@
 import Script from "next/script";
+import AnimatedProgressBar from "@/components/AnimatedProgressBar";
 
 const heroBackground =
   "https://pages.greatpages.com.br/lp.leandrocraig.com-up1/1779908478/imagens/desktop/2810123_1_17484831886837bc746b7c3.png";
@@ -11,19 +12,6 @@ const videoCover =
 
 const whatsappHref =
   "https://wa.me/5511922235589?text=Ol%C3%A1%2C%20comprei%20o%20Conversation%20Strategies%20e%20queria%20saber%20mais%20sobre%20o%20Speaking%20Rooms!";
-
-function ProgressBar() {
-  return (
-    <div className="mx-auto w-full max-w-[391px] rounded-[10px] border border-[#ccc] bg-white p-px">
-      <div className="relative h-7 overflow-hidden rounded-[9px]">
-        <div className="h-full w-[88%] bg-progress" />
-        <div className="absolute inset-y-0 left-[44%] flex items-center text-lg font-bold text-white">
-          88%
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function VturbPlayer() {
   return (
@@ -85,7 +73,7 @@ export default function Home() {
             ⚠️ Sua compra não está concluída
           </h2>
           <div className="w-full max-w-[316px] sm:max-w-[391px]">
-            <ProgressBar />
+            <AnimatedProgressBar durationMs={45000} finalPercent={88} />
           </div>
         </div>
       </header>
