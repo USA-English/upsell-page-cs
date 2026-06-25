@@ -35,7 +35,7 @@ a {
 }
 
 .vturb-cta-group {
-  display: none;
+  display: flex;
 }
 
 .vturb-cta-group.is-visible,
