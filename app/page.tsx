@@ -15,12 +15,13 @@ const whatsappHref =
 function VturbPlayer() {
   return (
     <div
-      className="mx-auto w-full max-w-[637px] bg-contain bg-center bg-no-repeat p-[4.6%] shadow-video"
+      className="relative mx-auto w-full max-w-[637px] overflow-hidden rounded-md bg-contain bg-center bg-no-repeat p-[4.6%] shadow-video backdrop-blur-[30px]"
       style={{ backgroundImage: `url(${frameBackground})` }}
     >
+      <div className="absolute inset-0 bg-white/10" />
       <div
         id="vid_6837bc40927070651cf06433"
-        className="relative mx-auto aspect-video w-full overflow-hidden bg-black"
+        className="relative z-10 mx-auto aspect-video w-full overflow-hidden bg-black"
       >
         <img
           id="thumb_6837bc40927070651cf06433"
