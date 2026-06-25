@@ -78,19 +78,22 @@ export default function Home() {
         </div>
       </header>
 
-      <section
-        className="min-h-[calc(100vh-40px)] bg-cover bg-[59%_44%] px-3 pb-12 pt-6 sm:min-h-[calc(100vh-72px)] sm:px-6 sm:pt-5"
-        style={{ backgroundImage: `url(${heroBackground})` }}
-      >
-        <h1 className="mx-auto max-w-[560px] text-center font-montserrat text-lg font-bold leading-[1.4] text-gold sm:mt-[68px] sm:text-[28px] sm:leading-[1.1]">
-          Assista o TUTORIAL abaixo com atenção para finalizar sua compra.
-        </h1>
+      <section className="relative isolate min-h-[calc(100vh-40px)] overflow-hidden px-3 pb-12 pt-6 sm:min-h-[calc(100vh-72px)] sm:px-6 sm:pt-5">
+        <div
+          className="absolute inset-0 -z-10 scale-[1.02] bg-cover bg-[59%_44%] blur-[5px]"
+          style={{ backgroundImage: `url(${heroBackground})` }}
+        />
+        <div className="relative z-10">
+          <h1 className="mx-auto max-w-[560px] text-center font-montserrat text-lg font-bold leading-[1.4] text-gold sm:mt-[68px] sm:text-[28px] sm:leading-[1.1]">
+            Assista o TUTORIAL abaixo com atenção para finalizar sua compra.
+          </h1>
 
-        <div className="mx-auto mt-6 max-w-[637px] sm:mt-10">
-          <VturbPlayer />
+          <div className="mx-auto mt-6 max-w-[637px] sm:mt-10">
+            <VturbPlayer />
+          </div>
+
+          <HiddenCtas />
         </div>
-
-        <HiddenCtas />
       </section>
 
       <Script id="vturb-cta-bridge" strategy="afterInteractive">
