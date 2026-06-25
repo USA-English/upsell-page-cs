@@ -92,21 +92,19 @@ export default function AnimatedProgressBar({
   }, [durationMs, finalPercent, frames]);
 
   const roundedPercent = Math.round(percent);
-  const labelPosition = Math.max(11, Math.min(48, percent / 2));
 
   return (
-    <div className="mx-auto w-full max-w-[391px] rounded-[10px] border border-[#ccc] bg-white p-px">
-      <div className="relative h-7 overflow-hidden rounded-[9px]">
-        <div
-          className="h-full bg-progress transition-[width] duration-500 ease-out"
-          style={{ width: `${percent}%` }}
-        />
-        <div
-          className="absolute inset-y-0 flex -translate-x-1/2 items-center text-lg font-bold text-white"
-          style={{ left: `${labelPosition}%` }}
-        >
-          {roundedPercent}%
+    <div className="mx-auto flex w-full max-w-[445px] items-center gap-3">
+      <div className="min-w-0 flex-1 rounded-[10px] border border-[#ccc] bg-white p-px">
+        <div className="h-7 overflow-hidden rounded-[9px]">
+          <div
+            className="h-full bg-progress transition-[width] duration-500 ease-out"
+            style={{ width: `${percent}%` }}
+          />
         </div>
+      </div>
+      <div className="min-w-[42px] text-left text-lg font-bold leading-none text-white">
+        {roundedPercent}%
       </div>
     </div>
   );
