@@ -1,8 +1,7 @@
 import Script from "next/script";
 import AnimatedProgressBar from "@/components/AnimatedProgressBar";
 
-const heroBackground =
-  "https://pages.greatpages.com.br/lp.leandrocraig.com-up1/1779908478/imagens/desktop/2810123_1_17484831886837bc746b7c3.png";
+const heroBackground = "/images/background-desktop.webp";
 
 const frameBackground =
   "https://pages.greatpages.com.br/lp.leandrocraig.com-up1/1779908478/imagens/desktop/2810123_1_17484831886837bc746bc3d732676545.svg";
@@ -79,7 +78,7 @@ export default function Home() {
       </header>
 
       <section
-        className="min-h-[543px] bg-cover bg-[59%_44%] px-3 pb-12 pt-6 sm:min-h-[711px] sm:px-6 sm:pt-5"
+        className="min-h-[calc(100vh-40px)] bg-cover bg-[59%_44%] px-3 pb-12 pt-6 sm:min-h-[calc(100vh-72px)] sm:px-6 sm:pt-5"
         style={{ backgroundImage: `url(${heroBackground})` }}
       >
         <h1 className="mx-auto max-w-[560px] text-center font-montserrat text-lg font-bold leading-[1.4] text-gold sm:mt-[68px] sm:text-[28px] sm:leading-[1.1]">
