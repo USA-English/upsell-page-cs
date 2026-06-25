@@ -1,83 +1,111 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 type AnimatedProgressBarProps = {
   durationMs?: number;
   finalPercent?: number;
   initialPercent?: number;
+  milestones?: ProgressMilestone[];
 };
 
-type ProgressFrame = {
-  time: number;
-  value: number;
+type ProgressMilestone = {
+  timeMs: number;
+  percent: number;
 };
+
+declare global {
+  interface Window {
+    setCheckoutProgress?: (percent: number) => void;
+    completeCheckoutProgress?: () => void;
+  }
+}
+
+const defaultMilestones: ProgressMilestone[] = [
+  { timeMs: 0, percent: 7 },
+  { timeMs: 3500, percent: 15 },
+  { timeMs: 9000, percent: 28 },
+  { timeMs: 16000, percent: 42 },
+  { timeMs: 24000, percent: 58 },
+  { timeMs: 33000, percent: 73 },
+  { timeMs: 45000, percent: 88 }
+];
 
 function easeOutCubic(value: number) {
   return 1 - Math.pow(1 - value, 3);
 }
 
-function buildProgressFrames({
-  durationMs,
-  finalPercent,
-  initialPercent
-}: Required<AnimatedProgressBarProps>): ProgressFrame[] {
-  const frameCount = 24;
-  const frames: ProgressFrame[] = [{ time: 0, value: initialPercent }];
-  let elapsed = 0;
-  let current = initialPercent;
-  let remaining = finalPercent - initialPercent;
-
-  for (let index = 1; index <= frameCount; index += 1) {
-    const progressRatio = index / frameCount;
-    const delayWeight =
-      0.55 + Math.random() * 1.4 + (index % 5 === 0 ? Math.random() * 1.6 : 0);
-    const estimatedTime = durationMs / frameCount;
-    elapsed = Math.min(durationMs, elapsed + estimatedTime * delayWeight);
-
-    const naturalPush =
-      remaining *
-      (0.035 + Math.random() * 0.085 + (progressRatio < 0.35 ? 0.025 : 0));
-    const occasionalPause = index % 6 === 0 ? Math.random() * 0.35 : 0;
-    const increment = Math.max(0.25, naturalPush - occasionalPause);
-
-    current = Math.min(finalPercent, current + increment);
-    remaining = finalPercent - current;
-    frames.push({ time: elapsed, value: current });
-  }
-
-  frames.push({ time: durationMs, value: finalPercent });
-  return frames.sort((a, b) => a.time - b.time);
-}
-
 export default function AnimatedProgressBar({
   durationMs = 45000,
   finalPercent = 88,
-  initialPercent = 7
+  initialPercent = 7,
+  milestones = defaultMilestones
 }: AnimatedProgressBarProps) {
   const [percent, setPercent] = useState(initialPercent);
-  const frames = useMemo(
-    () => buildProgressFrames({ durationMs, finalPercent, initialPercent }),
-    [durationMs, finalPercent, initialPercent]
-  );
 
   useEffect(() => {
+    const normalizedMilestones = [
+      { timeMs: 0, percent: initialPercent },
+      ...milestones,
+      { timeMs: durationMs, percent: finalPercent }
+    ]
+      .map((milestone) => ({
+        timeMs: Math.min(durationMs, Math.max(0, milestone.timeMs)),
+        percent: Math.min(finalPercent, Math.max(initialPercent, milestone.percent))
+      }))
+      .sort((a, b) => a.timeMs - b.timeMs)
+      .filter(
+        (milestone, index, list) =>
+          index === list.findIndex((item) => item.timeMs === milestone.timeMs)
+      );
     const start = performance.now();
     let animationFrame = 0;
+    let scriptOverride = false;
+
+    function setProgressFromScript(value: number) {
+      scriptOverride = true;
+      setPercent(Math.min(finalPercent, Math.max(initialPercent, value)));
+    }
+
+    function handleProgressEvent(event: Event) {
+      const customEvent = event as CustomEvent<{ percent?: number }>;
+      if (typeof customEvent.detail?.percent === "number") {
+        setProgressFromScript(customEvent.detail.percent);
+      }
+    }
+
+    function handleMessage(event: MessageEvent) {
+      if (
+        event.data &&
+        event.data.type === "set-checkout-progress" &&
+        typeof event.data.percent === "number"
+      ) {
+        setProgressFromScript(event.data.percent);
+      }
+    }
 
     function update(now: number) {
+      if (scriptOverride) {
+        return;
+      }
+
       const elapsed = Math.min(durationMs, now - start);
-      const nextIndex = frames.findIndex((frame) => frame.time >= elapsed);
-      const currentIndex = Math.max(1, nextIndex === -1 ? frames.length - 1 : nextIndex);
-      const previous = frames[currentIndex - 1];
-      const next = frames[currentIndex];
-      const segmentDuration = Math.max(1, next.time - previous.time);
+      const nextIndex = normalizedMilestones.findIndex(
+        (milestone) => milestone.timeMs >= elapsed
+      );
+      const currentIndex = Math.max(
+        1,
+        nextIndex === -1 ? normalizedMilestones.length - 1 : nextIndex
+      );
+      const previous = normalizedMilestones[currentIndex - 1];
+      const next = normalizedMilestones[currentIndex];
+      const segmentDuration = Math.max(1, next.timeMs - previous.timeMs);
       const segmentProgress = Math.min(
         1,
-        Math.max(0, (elapsed - previous.time) / segmentDuration)
+        Math.max(0, (elapsed - previous.timeMs) / segmentDuration)
       );
       const eased = easeOutCubic(segmentProgress);
-      const value = previous.value + (next.value - previous.value) * eased;
+      const value = previous.percent + (next.percent - previous.percent) * eased;
 
       setPercent(Math.min(finalPercent, value));
 
@@ -86,10 +114,20 @@ export default function AnimatedProgressBar({
       }
     }
 
+    window.setCheckoutProgress = setProgressFromScript;
+    window.completeCheckoutProgress = () => setProgressFromScript(finalPercent);
+    window.addEventListener("checkout-progress", handleProgressEvent);
+    window.addEventListener("message", handleMessage);
     animationFrame = requestAnimationFrame(update);
 
-    return () => cancelAnimationFrame(animationFrame);
-  }, [durationMs, finalPercent, frames]);
+    return () => {
+      cancelAnimationFrame(animationFrame);
+      window.removeEventListener("checkout-progress", handleProgressEvent);
+      window.removeEventListener("message", handleMessage);
+      delete window.setCheckoutProgress;
+      delete window.completeCheckoutProgress;
+    };
+  }, [durationMs, finalPercent, initialPercent, milestones]);
 
   const roundedPercent = Math.round(percent);
 
