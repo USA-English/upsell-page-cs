@@ -83,7 +83,7 @@ export default function Home() {
         style={{ backgroundImage: `url(${heroBackground})` }}
       >
         <h1 className="mx-auto max-w-[560px] text-center font-montserrat text-lg font-bold leading-[1.4] text-gold sm:mt-[68px] sm:text-[28px] sm:leading-[1.1]">
-          Assista com atenção ao vídeo abaixo para finalizar sua compra.
+          Assista o TUTORIAL abaixo com atenção para finalizar sua compra.
         </h1>
 
         <div className="mx-auto mt-6 max-w-[637px] sm:mt-10">
