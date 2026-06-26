@@ -80,7 +80,7 @@ export default function Home() {
 
       <section className="relative isolate min-h-[calc(100vh-40px)] overflow-hidden px-3 pb-12 pt-6 sm:min-h-[calc(100vh-72px)] sm:px-6 sm:pt-5">
         <div
-          className="absolute inset-0 -z-10 scale-[1.02] bg-cover bg-[59%_44%] blur-[5px]"
+          className="absolute inset-0 -z-10 bg-cover bg-[59%_44%]"
           style={{ backgroundImage: `url(${heroBackground})` }}
         />
         <div className="relative z-10">
