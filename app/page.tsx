@@ -48,10 +48,16 @@ function HiddenCtas() {
       data-vturb-target="upsell-ctas"
     >
       <div className="flex w-full flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5">
+        <div className="text-center font-[Arial] text-lg font-black uppercase text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.7)] sm:hidden">
+          ÚLTIMA CHANCE ❗
+          <span aria-hidden="true" className="block leading-none">
+            ↓
+          </span>
+        </div>
         <button className="ticto-upsell-button min-h-[56px] w-full max-w-[500px] rounded-[10px] bg-buy px-5 py-3 text-center font-[Arial] text-[18px] font-black uppercase leading-tight text-white sm:text-[20px]">
           COMPRAR O PRESENTE MISTERIOSO POR R$9,90
         </button>
-        <div className="whitespace-nowrap text-center font-[Arial] text-lg font-black uppercase text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.7)] sm:text-left">
+        <div className="hidden whitespace-nowrap text-center font-[Arial] text-lg font-black uppercase text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.7)] sm:block sm:text-left">
           <span aria-hidden="true">← </span>ÚLTIMA CHANCE ❗
         </div>
       </div>
