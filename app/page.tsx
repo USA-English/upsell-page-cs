@@ -2,6 +2,7 @@ import Script from "next/script";
 import AnimatedProgressBar from "@/components/AnimatedProgressBar";
 
 const heroBackground = "/images/background-desktop.webp";
+const mobileHeroBackground = "/images/backdrop-mobile.webp";
 
 const frameBackground =
   "https://pages.greatpages.com.br/lp.leandrocraig.com-up1/1779908478/imagens/desktop/2810123_1_17484831886837bc746bc3d732676545.svg";
@@ -95,7 +96,11 @@ export default function Home() {
 
       <section className="relative isolate min-h-[calc(100vh-40px)] overflow-hidden px-3 pb-12 pt-6 sm:min-h-[calc(100vh-72px)] sm:px-6 sm:pt-5">
         <div
-          className="absolute inset-0 -z-10 bg-cover bg-[59%_44%]"
+          className="absolute inset-0 -z-10 bg-cover bg-center sm:hidden"
+          style={{ backgroundImage: `url(${mobileHeroBackground})` }}
+        />
+        <div
+          className="absolute inset-0 -z-10 hidden bg-cover bg-[59%_44%] sm:block"
           style={{ backgroundImage: `url(${heroBackground})` }}
         />
         <div className="relative z-10">
