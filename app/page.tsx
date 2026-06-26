@@ -104,7 +104,7 @@ export default function Home() {
           style={{ backgroundImage: `url(${heroBackground})` }}
         />
         <div className="relative z-10">
-          <h1 className="mx-auto max-w-[560px] text-center font-montserrat text-lg font-bold leading-[1.4] text-gold sm:mt-[68px] sm:text-[28px] sm:leading-[1.1]">
+          <h1 className="mx-auto w-[88%] max-w-[430px] text-center font-montserrat text-lg font-bold leading-[1.4] text-gold sm:mt-[68px] sm:w-auto sm:max-w-[560px] sm:text-[28px] sm:leading-[1.1]">
             Assista o TUTORIAL abaixo com atenção para finalizar sua compra.
           </h1>
 
