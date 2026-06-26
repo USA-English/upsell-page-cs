@@ -9,8 +9,7 @@ const frameBackground =
 const videoCover =
   "https://images.converteai.net/b397f94e-104c-4be6-9167-4643573103b7/players/6837bc40927070651cf06433/cover.jpg";
 
-const whatsappHref =
-  "https://wa.me/5511922235589?text=Ol%C3%A1%2C%20comprei%20o%20Conversation%20Strategies%20e%20queria%20saber%20mais%20sobre%20o%20Speaking%20Rooms!";
+const hubLoginHref = "https://hub.speakingrooms.com.br/login";
 
 function VturbPlayer() {
   return (
@@ -45,20 +44,30 @@ function HiddenCtas() {
   return (
     <div
       id="vturb-cta-group"
-      className="vturb-cta-group mx-auto mt-4 w-full max-w-[360px] flex-col gap-3"
+      className="vturb-cta-group mx-auto mt-10 w-full max-w-[640px] flex-col items-center gap-5 sm:mt-14"
       data-vturb-target="upsell-ctas"
     >
-      <button className="ticto-upsell-button min-h-[50px] rounded-[10px] bg-buy px-4 py-2 text-center font-[Arial] text-[21px] font-black uppercase text-white">
-        COMPRAR AGORA
-      </button>
-      <button className="ticto-refuse-button min-h-[38px] rounded-[10px] bg-refuse px-4 py-2 text-center font-[Roboto] text-[15px] font-medium uppercase text-white">
-        NÃO QUERO, OBRIGADO
-      </button>
+      <div className="flex w-full flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5">
+        <button className="ticto-upsell-button min-h-[56px] w-full max-w-[500px] rounded-[10px] bg-buy px-5 py-3 text-center font-[Arial] text-[18px] font-black uppercase leading-tight text-white sm:text-[20px]">
+          COMPRAR O PRESENTE MISTERIOSO POR R$9,90
+        </button>
+        <div className="whitespace-nowrap text-center font-[Arial] text-lg font-black uppercase text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.7)] sm:text-left">
+          <span aria-hidden="true">← </span>ÚLTIMA CHANCE ❗
+        </div>
+      </div>
+
       <a
-        href={whatsappHref}
-        className="min-h-[50px] rounded-[10px] bg-whatsapp px-4 py-2 text-center font-[Arial] text-[21px] font-black uppercase text-white"
+        href={hubLoginHref}
+        className="ticto-refuse-button flex min-h-[38px] w-full max-w-[360px] items-center justify-center rounded-[10px] bg-refuse px-4 py-2 text-center font-[Roboto] text-[15px] font-medium text-white"
       >
-        AINDA ESTOU COM DÚVIDAS
+        Não quero o presente.
+      </a>
+
+      <a
+        href={hubLoginHref}
+        className="flex min-h-[38px] w-full max-w-[360px] items-center justify-center rounded-[10px] bg-[#0349b9] px-4 py-2 text-center font-[Roboto] text-[15px] font-medium text-white"
+      >
+        Já comprei por R$2 na tela anterior 😎
       </a>
     </div>
   );
