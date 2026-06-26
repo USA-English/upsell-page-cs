@@ -88,7 +88,7 @@ export default function Home() {
             Assista o TUTORIAL abaixo com atenção para finalizar sua compra.
           </h1>
 
-          <div className="mx-auto mt-6 max-w-[637px] sm:mt-10">
+          <div className="mx-auto mt-6 max-w-[637px] sm:mt-10 sm:scale-[1.05]">
             <VturbPlayer />
           </div>
 
