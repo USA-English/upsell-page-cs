@@ -8,6 +8,7 @@ Next.js landing page for the Conversation Strategies upsell flow.
 - React
 - Tailwind CSS
 - vTurb/ConverteAI player embed
+- LastLink one-click upsell script
 
 ## Local Commands
 
@@ -17,6 +18,22 @@ pnpm dev
 pnpm build
 ```
 
+## LastLink One-Click Upsell
+
+The page loads the required LastLink script in `app/page.tsx`:
+
+```html
+<script src="https://cdn.lastlink.com/upsell.min.js"></script>
+```
+
+The post-upsell redirect is configured as:
+
+```js
+var upsellRedirect = "https://hub.speakingrooms.com.br/login";
+```
+
+Do not replace the LastLink script and do not rename the accept button ID.
+
 ## CTA Buttons
 
 The CTA group lives in `#vturb-cta-group` inside `app/page.tsx`.
@@ -25,26 +42,33 @@ Current buttons:
 
 - Primary upsell button
   - Text: `COMPRAR O PRESENTE MISTERIOSO POR R$9,90`
-  - Class: `ticto-upsell-button`
+  - ID: `llupsell-CA735AB24-`
+  - Function: accepts and processes the one-click upsell through LastLink
+  - Important: this button must not have `href`, `onclick`, or any custom redirect
   - Color: green, configured through Tailwind color `buy`
-  - Current behavior: button element reserved for a future purchase/checkout script
   - Desktop helper label: `← ÚLTIMA CHANCE ❗`, positioned to the right of the button
   - Mobile helper label: `ÚLTIMA CHANCE ❗` with `↓`, positioned above the button
 
 - Refusal button
   - Text: `Não quero o presente.`
-  - Class: `ticto-refuse-button`
-  - Color: red, configured through Tailwind color `refuse`
+  - ID: `denyButton77f02e7`
+  - Function: refuses the offer and redirects to the member area
   - URL: `https://hub.speakingrooms.com.br/login`
-  - Target behavior: same tab
+  - URL query parameters from the current page are preserved
+  - Color: red, configured through Tailwind color `refuse`
 
 - Already purchased button
   - Text: `Já comprei por R$2 na tela anterior 😎`
-  - Color: `#0349b9`
+  - ID: `alreadyBoughtButton`
+  - Function: sends users who already bought the order bump to the member area
   - URL: `https://hub.speakingrooms.com.br/login`
-  - Target behavior: same tab
+  - URL query parameters from the current page are preserved
+  - Color: `#0349b9`
 
-The previous WhatsApp CTA was removed.
+There must be exactly one element with `id="llupsell-CA735AB24-"`.
+The third button must not use the LastLink accept ID and must not use an ID starting with `denyButton`.
+
+The previous WhatsApp CTA was removed. All old Ticto classes and button IDs should remain absent.
 
 ## CTA Reveal
 
