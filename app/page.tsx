@@ -10,8 +10,6 @@ const frameBackground =
 const videoCover =
   "https://images.converteai.net/b397f94e-104c-4be6-9167-4643573103b7/players/6837bc40927070651cf06433/cover.jpg";
 
-const hubLoginHref = "https://hub.speakingrooms.com.br/login";
-
 function VturbPlayer() {
   return (
     <div
@@ -55,7 +53,11 @@ function HiddenCtas() {
             ↓
           </span>
         </div>
-        <button className="ticto-upsell-button min-h-[56px] w-full max-w-[500px] rounded-[10px] bg-buy px-5 py-3 text-center font-[Arial] text-[18px] font-black uppercase leading-tight text-white sm:text-[20px]">
+        <button
+          id="llupsell-CA735AB24-"
+          type="button"
+          className="min-h-[56px] w-full max-w-[500px] rounded-[10px] bg-buy px-5 py-3 text-center font-[Arial] text-[18px] font-black uppercase leading-tight text-white sm:text-[20px]"
+        >
           COMPRAR O PRESENTE MISTERIOSO POR R$9,90
         </button>
         <div className="absolute left-[calc(50%+270px)] top-1/2 hidden -translate-y-1/2 whitespace-nowrap text-center font-[Arial] text-lg font-black uppercase text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.7)] sm:block sm:text-left">
@@ -63,19 +65,21 @@ function HiddenCtas() {
         </div>
       </div>
 
-      <a
-        href={hubLoginHref}
-        className="ticto-refuse-button flex min-h-[38px] w-full max-w-[360px] items-center justify-center rounded-[10px] bg-refuse px-4 py-2 text-center font-[Roboto] text-[15px] font-medium text-white"
+      <button
+        id="denyButton77f02e7"
+        type="button"
+        className="flex min-h-[38px] w-full max-w-[360px] items-center justify-center rounded-[10px] bg-refuse px-4 py-2 text-center font-[Roboto] text-[15px] font-medium text-white"
       >
         Não quero o presente.
-      </a>
+      </button>
 
-      <a
-        href={hubLoginHref}
+      <button
+        id="alreadyBoughtButton"
+        type="button"
         className="flex min-h-[38px] w-full max-w-[360px] items-center justify-center rounded-[10px] bg-[#0349b9] px-4 py-2 text-center font-[Roboto] text-[15px] font-medium text-white"
       >
         Já comprei por R$2 na tela anterior 😎
-      </a>
+      </button>
     </div>
   );
 }
@@ -115,6 +119,50 @@ export default function Home() {
           <HiddenCtas />
         </div>
       </section>
+
+      <Script
+        src="https://cdn.lastlink.com/upsell.min.js"
+        strategy="afterInteractive"
+      />
+
+      <Script id="lastlink-one-click-upsell" strategy="afterInteractive">
+        {`
+          var upsellRedirect = "https://hub.speakingrooms.com.br/login";
+
+          function redirectToHubWithCurrentParams() {
+            var currentUrl = new URL(window.location.href);
+            var newUrl = new URL("https://hub.speakingrooms.com.br/login");
+
+            currentUrl.searchParams.forEach(function (value, key) {
+              newUrl.searchParams.append(key, value);
+            });
+
+            window.location.href = newUrl.toString();
+          }
+
+          function setupDenyButtons() {
+            document.querySelectorAll('[id^="denyButton"]').forEach(function (button) {
+              button.onclick = redirectToHubWithCurrentParams;
+            });
+          }
+
+          function setupAlreadyBoughtButton() {
+            var button = document.getElementById("alreadyBoughtButton");
+            if (button) button.onclick = redirectToHubWithCurrentParams;
+          }
+
+          function setupLastLinkButtons() {
+            setupDenyButtons();
+            setupAlreadyBoughtButton();
+          }
+
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", setupLastLinkButtons);
+          } else {
+            setupLastLinkButtons();
+          }
+        `}
+      </Script>
 
       <Script id="vturb-cta-bridge" strategy="afterInteractive">
         {`
