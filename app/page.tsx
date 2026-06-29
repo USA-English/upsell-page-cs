@@ -127,11 +127,11 @@ export default function Home() {
 
       <Script id="lastlink-one-click-upsell" strategy="afterInteractive">
         {`
-          var upsellRedirect = "https://hub.speakingrooms.com.br/login";
+          var upsellRedirect = "https://typ-final-converted.leandrocraig.com/";
 
-          function redirectToHubWithCurrentParams() {
+          function redirectDenyWithCurrentParams() {
             var currentUrl = new URL(window.location.href);
-            var newUrl = new URL("https://hub.speakingrooms.com.br/login");
+            var newUrl = new URL("https://typ-final.leandrocraig.com/");
 
             currentUrl.searchParams.forEach(function (value, key) {
               newUrl.searchParams.append(key, value);
@@ -142,13 +142,24 @@ export default function Home() {
 
           function setupDenyButtons() {
             document.querySelectorAll('[id^="denyButton"]').forEach(function (button) {
-              button.onclick = redirectToHubWithCurrentParams;
+              button.onclick = redirectDenyWithCurrentParams;
             });
           }
 
           function setupAlreadyBoughtButton() {
             var button = document.getElementById("alreadyBoughtButton");
-            if (button) button.onclick = redirectToHubWithCurrentParams;
+            if (button) {
+              button.onclick = function () {
+                var currentUrl = new URL(window.location.href);
+                var newUrl = new URL("https://hub.speakingrooms.com.br/login");
+
+                currentUrl.searchParams.forEach(function (value, key) {
+                  newUrl.searchParams.append(key, value);
+                });
+
+                window.location.href = newUrl.toString();
+              };
+            }
           }
 
           function setupLastLinkButtons() {
