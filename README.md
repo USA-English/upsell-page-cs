@@ -9,6 +9,7 @@ Next.js landing page for the Conversation Strategies upsell flow.
 - Tailwind CSS
 - vTurb/ConverteAI player embed
 - LastLink one-click upsell script
+- Make webhook verification for the already-purchased flow
 
 ## Local Commands
 
@@ -61,9 +62,16 @@ Current buttons:
 - Already purchased button
   - Text: `Já comprei por R$2 na tela anterior 😎`
   - ID: `alreadyBoughtButton`
-  - Function: sends users who already bought the order bump to the member area
-  - URL: `https://hub.speakingrooms.com.br/login`
-  - URL query parameters from the current page are preserved
+  - Function: opens a modal, asks for purchase email, and verifies through Make
+  - Make URL: `https://hook.us2.make.com/22jehst3h93w5vi01r3vel961clrzkee`
+  - Request: `GET` with `email=<email informado>`
+  - Trigger: only the explicit click on `Verificar compra` inside the modal calls Make
+  - Opening the modal, typing the email, or pressing Enter must not call Make
+  - Confirmed response: `{ "hasGift": true }`
+  - Denied response: `{ "hasGift": false }`
+  - Confirmed URL: `https://typ-final-converted.leandrocraig.com/`
+  - Failure fallback URL: `https://typ-final-converted.leandrocraig.com/`
+  - Failure fallback delay: wait at least `10s` from submission before redirecting
   - Color: `#0349b9`
 
 There must be exactly one element with `id="llupsell-CA735AB24-"`.
