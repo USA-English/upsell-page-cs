@@ -29,7 +29,7 @@ The page loads the required LastLink script in `app/page.tsx`:
 The post-upsell redirect is configured as:
 
 ```js
-var upsellRedirect = "https://hub.speakingrooms.com.br/login";
+var upsellRedirect = "https://typ-final-converted.leandrocraig.com/";
 ```
 
 Do not replace the LastLink script and do not rename the accept button ID.
@@ -44,6 +44,7 @@ Current buttons:
   - Text: `COMPRAR O PRESENTE MISTERIOSO POR R$9,90`
   - ID: `llupsell-CA735AB24-`
   - Function: accepts and processes the one-click upsell through LastLink
+  - Post-purchase URL: `https://typ-final-converted.leandrocraig.com/`
   - Important: this button must not have `href`, `onclick`, or any custom redirect
   - Color: green, configured through Tailwind color `buy`
   - Desktop helper label: `← ÚLTIMA CHANCE ❗`, positioned to the right of the button
@@ -52,8 +53,8 @@ Current buttons:
 - Refusal button
   - Text: `Não quero o presente.`
   - ID: `denyButton77f02e7`
-  - Function: refuses the offer and redirects to the member area
-  - URL: `https://hub.speakingrooms.com.br/login`
+  - Function: refuses the offer through the LastLink deny-button hook and redirects to the final thank-you page
+  - URL: `https://typ-final.leandrocraig.com/`
   - URL query parameters from the current page are preserved
   - Color: red, configured through Tailwind color `refuse`
 
