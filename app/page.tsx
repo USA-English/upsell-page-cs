@@ -1,5 +1,6 @@
 import Script from "next/script";
 import AnimatedProgressBar from "@/components/AnimatedProgressBar";
+import AlreadyBoughtFlow from "@/components/AlreadyBoughtFlow";
 
 const heroBackground = "/images/background-desktop.webp";
 const mobileHeroBackground = "/images/backdrop-mobile.webp";
@@ -73,13 +74,7 @@ function HiddenCtas() {
         Não quero o presente.
       </button>
 
-      <button
-        id="alreadyBoughtButton"
-        type="button"
-        className="flex min-h-[38px] w-full max-w-[360px] items-center justify-center rounded-[10px] bg-[#0349b9] px-4 py-2 text-center font-[Roboto] text-[15px] font-medium text-white"
-      >
-        Já comprei por R$2 na tela anterior 😎
-      </button>
+      <AlreadyBoughtFlow />
     </div>
   );
 }
@@ -146,31 +141,10 @@ export default function Home() {
             });
           }
 
-          function setupAlreadyBoughtButton() {
-            var button = document.getElementById("alreadyBoughtButton");
-            if (button) {
-              button.onclick = function () {
-                var currentUrl = new URL(window.location.href);
-                var newUrl = new URL("https://hub.speakingrooms.com.br/login");
-
-                currentUrl.searchParams.forEach(function (value, key) {
-                  newUrl.searchParams.append(key, value);
-                });
-
-                window.location.href = newUrl.toString();
-              };
-            }
-          }
-
-          function setupLastLinkButtons() {
-            setupDenyButtons();
-            setupAlreadyBoughtButton();
-          }
-
           if (document.readyState === "loading") {
-            document.addEventListener("DOMContentLoaded", setupLastLinkButtons);
+            document.addEventListener("DOMContentLoaded", setupDenyButtons);
           } else {
-            setupLastLinkButtons();
+            setupDenyButtons();
           }
         `}
       </Script>
