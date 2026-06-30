@@ -122,7 +122,7 @@ export default function Home() {
 
       <Script id="lastlink-one-click-upsell" strategy="afterInteractive">
         {`
-          var upsellRedirect = "https://typ-final-converted.leandrocraig.com/";
+          var upsellRedirect = "https://typ-final-converted-cs.leandrocraig.com/";
 
           function redirectDenyWithCurrentParams() {
             var currentUrl = new URL(window.location.href);
