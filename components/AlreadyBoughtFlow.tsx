@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const makeWebhookUrl =
   "https://hook.us2.make.com/22jehst3h93w5vi01r3vel961clrzkee";
-const finalConvertedUrl = "https://typ-final-converted.leandrocraig.com/";
+const finalConvertedUrl = "https://typ-final-converted-cs.leandrocraig.com/";
 const fallbackDelayMs = 10000;
 
 function buildRedirectUrl(destination: string) {
