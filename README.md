@@ -30,7 +30,7 @@ The page loads the required LastLink script in `app/page.tsx`:
 The post-upsell redirect is configured as:
 
 ```js
-var upsellRedirect = "https://typ-final-converted.leandrocraig.com/";
+var upsellRedirect = "https://typ-final-converted-cs.leandrocraig.com/";
 ```
 
 Do not replace the LastLink script and do not rename the accept button ID.
@@ -45,7 +45,7 @@ Current buttons:
   - Text: `COMPRAR O PRESENTE MISTERIOSO POR R$9,90`
   - ID: `llupsell-CA735AB24-`
   - Function: accepts and processes the one-click upsell through LastLink
-  - Post-purchase URL: `https://typ-final-converted.leandrocraig.com/`
+  - Post-purchase URL: `https://typ-final-converted-cs.leandrocraig.com/`
   - Important: this button must not have `href`, `onclick`, or any custom redirect
   - Color: green, configured through Tailwind color `buy`
   - Desktop helper label: `← ÚLTIMA CHANCE ❗`, positioned to the right of the button
@@ -69,8 +69,8 @@ Current buttons:
   - Opening the modal, typing the email, or pressing Enter must not call Make
   - Confirmed response: `{ "hasGift": true }`
   - Denied response: `{ "hasGift": false }`
-  - Confirmed URL: `https://typ-final-converted.leandrocraig.com/`
-  - Failure fallback URL: `https://typ-final-converted.leandrocraig.com/`
+  - Confirmed URL: `https://typ-final-converted-cs.leandrocraig.com/`
+  - Failure fallback URL: `https://typ-final-converted-cs.leandrocraig.com/`
   - Failure fallback delay: wait at least `10s` from submission before redirecting
   - Color: `#0349b9`
 
