@@ -5,6 +5,16 @@ export const metadata: Metadata = {
   title: "Conversation Strategies | Upsell",
   description: "Upsell page for Conversation Strategies.",
   metadataBase: new URL("https://example.com"),
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true
+    }
+  },
   icons: {
     icon: "/images/typ-gift-favicon.webp",
     shortcut: "/images/typ-gift-favicon.webp",
