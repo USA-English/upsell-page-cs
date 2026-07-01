@@ -87,3 +87,15 @@ The CTA group is currently visible by default while visual adjustments are being
 When it is time to hide the buttons again, change `.vturb-cta-group` in `app/globals.css` back to `display: none;`.
 
 The reveal hooks are still available: add the `is-visible` class, add `show-upsell-ctas` to `body`, dispatch `vturb:show-ctas`, or open the page with `?showCtas=1` for testing.
+
+## Search Indexing
+
+This upsell page should not be indexed by search engines.
+
+Current protections:
+
+- `app/layout.tsx` sets `robots` metadata to `noindex` and `nofollow`.
+- `app/robots.ts` generates a `robots.txt` that disallows all crawlers.
+- `next.config.ts` sends `X-Robots-Tag: noindex, nofollow, noarchive` on all routes.
+
+These settings discourage indexing and search visibility, but they do not authenticate the page. Anyone with the direct URL can still open it.
