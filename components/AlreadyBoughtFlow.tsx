@@ -32,6 +32,8 @@ export default function AlreadyBoughtFlow() {
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [wasDenied, setWasDenied] = useState(false);
+  const normalizedEmail = email.trim().toLowerCase();
+  const canVerifyPurchase = isValidEmail(normalizedEmail);
 
   function closeDialog() {
     if (isSubmitting) return;
@@ -55,7 +57,6 @@ export default function AlreadyBoughtFlow() {
   }
 
   async function handleVerifyClick() {
-    const normalizedEmail = email.trim().toLowerCase();
     if (!isValidEmail(normalizedEmail)) {
       setError("Informe um email válido para continuar.");
       return;
@@ -152,7 +153,10 @@ export default function AlreadyBoughtFlow() {
                 <input
                   type="email"
                   value={email}
-                  onChange={(event) => setEmail(event.target.value)}
+                  onChange={(event) => {
+                    setEmail(event.target.value);
+                    if (error) setError("");
+                  }}
                   disabled={isSubmitting}
                   placeholder="seuemail@exemplo.com"
                   className="mt-5 h-12 w-full rounded-[8px] border border-[#c9c9c9] px-4 text-left font-open text-base outline-none focus:border-[#0349b9]"
@@ -167,7 +171,7 @@ export default function AlreadyBoughtFlow() {
                 <button
                   type="button"
                   onClick={handleVerifyClick}
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !canVerifyPurchase}
                   className="mt-5 min-h-[44px] w-full rounded-[10px] bg-[#0349b9] px-5 py-2 font-[Roboto] text-[15px] font-medium text-white disabled:cursor-not-allowed disabled:opacity-70"
                 >
                   {isSubmitting ? "Verificando..." : "Verificar compra"}
