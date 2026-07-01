@@ -66,6 +66,7 @@ Current buttons:
   - Make URL: `https://hook.us2.make.com/22jehst3h93w5vi01r3vel961clrzkee`
   - Request: `GET` with `email=<email informado>`
   - Trigger: only the explicit click on `Verificar compra` inside the modal calls Make
+  - The `Verificar compra` button stays disabled until the email matches the local validation regex
   - Opening the modal, typing the email, or pressing Enter must not call Make
   - Confirmed response: `{ "hasGift": true }`
   - Denied response: `{ "hasGift": false }`
